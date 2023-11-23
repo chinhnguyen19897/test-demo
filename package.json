@@ -1,0 +1,52 @@
+{
+  "name": "test-demo",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "concurrently \"yarn dev-server\"  \"yarn dev\"",
+    "dev": "vite",
+    "dev-server": "node src/server.js -p $PORT",
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
+    "generated-data": "ts-node --esm src/__fake-api__/generated-data.ts"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^3.3.2",
+    "autoprefixer": "^10.4.16",
+    "axios": "^1.6.2",
+    "faker": "^6.6.6",
+    "flowbite": "^2.1.1",
+    "flowbite-react": "^0.6.4",
+    "json-server": "^0.17.4",
+    "postcss": "^8.4.31",
+    "query-string": "^8.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.48.2",
+    "react-router-dom": "^6.19.0",
+    "tailwindcss": "^3.3.5",
+    "yup": "^1.3.2"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^8.3.1",
+    "@types/lodash": "^4.14.202",
+    "@types/node": "^20.9.2",
+    "@types/react": "^18.2.37",
+    "@types/react-dom": "^18.2.15",
+    "@typescript-eslint/eslint-plugin": "^6.10.0",
+    "@typescript-eslint/parser": "^6.10.0",
+    "@vitejs/plugin-react": "^4.2.0",
+    "concurrently": "^8.2.2",
+    "dotenv": "^16.3.1",
+    "dotenv-webpack": "^8.0.1",
+    "eslint": "^8.53.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.4",
+    "lodash": "^4.17.21",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2",
+    "vite": "^5.0.0"
+  }
+}
