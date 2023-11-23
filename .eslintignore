@@ -1,0 +1,12 @@
+node_modules/
+
+# Ignore artifacts:
+coverage/
+dist/
+public/
+
+tailwindcss.config.js
+postcss.config.cjs
+*.d.ts
+out
+!.storybook
