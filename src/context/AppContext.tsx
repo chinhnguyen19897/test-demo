@@ -6,7 +6,7 @@ import {IFormField} from "../types/data.ts";
 type AppContext = {
     isOpenModal: boolean;
     isOpenSidebar: boolean;
-    provinces: [];
+    provinces: Array<unknown>;
     formData: IFormField[];
     openModal: () => void;
     closeModal: () => void;

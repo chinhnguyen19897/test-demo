@@ -2,10 +2,11 @@ import {Button, Label, Modal, TextInput} from "flowbite-react";
 import {FormEvent, useContext, useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {AuthContext} from "../context/AuthContext.tsx";
-import axios from "axios";
+import axios, {AxiosError} from "axios";
 import {AppDataContext} from "../context/AppContext.tsx";
 import {customInputTheme, customModal} from "../config/themes/themes.ts";
 import {routesConfig} from "../config/routes.ts";
+import {isEmpty} from "lodash";
 
 
 const LoginModal = () => {
@@ -15,7 +16,7 @@ const LoginModal = () => {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-
+    const [errorMessage, setErrorMessage] = useState("")
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -38,7 +39,17 @@ const LoginModal = () => {
             dataApi?.closeModal()
             navigate(routesConfig.account, {replace: true});
         } catch (err) {
-            console.log(err);
+            const error = err as AxiosError
+            console.error(error);
+            if (!error.response) {
+                setErrorMessage("Không có phản hồi từ server")
+            } else if (error.response?.status === 400) {
+                setErrorMessage("Tài khoản hoặc mật khẩu không đúng.");
+            } else if (error.response?.status === 401) {
+                setErrorMessage("Tài khoản không được truy cập.");
+            } else {
+                setErrorMessage("Đăng nhập không thành công");
+            }
         }
     };
 
@@ -58,6 +69,7 @@ const LoginModal = () => {
                     Đăng nhập
                 </Modal.Header>
                 <Modal.Body>
+                    {!isEmpty(errorMessage) && (<p className="text-center text-sm text-orange-500">{errorMessage}</p>)}
                     <form className="flex max-w-md flex-col gap-4" onSubmit={(e) => handleSubmit(e)}>
                         <div>
                             <div className="mb-2 block">
